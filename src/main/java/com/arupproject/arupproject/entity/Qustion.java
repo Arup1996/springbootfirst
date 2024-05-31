@@ -18,6 +18,7 @@ public class Qustion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private Integer user_id;
     private String qustion;
     private String option_a;
     private String option_b;
