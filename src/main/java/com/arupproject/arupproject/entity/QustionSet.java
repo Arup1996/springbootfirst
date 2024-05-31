@@ -12,22 +12,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Qustion {
-
-    
+public class QustionSet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private Integer userid;
     private Integer setid;
-    private String qustion;
-    private String option_a;
-    private String option_b;
-    private String option_c;
-    private String option_d;
+    private Integer SetUserid;
+    private String  setname;
+    private String  setcatagori;
 
-
-   
-   
-    
 }

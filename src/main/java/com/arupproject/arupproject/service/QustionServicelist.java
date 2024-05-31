@@ -5,10 +5,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.arupproject.arupproject.entity.Qustion;
+import com.arupproject.arupproject.entity.User;
 import com.arupproject.arupproject.repository.QustionRepo;
+import com.arupproject.arupproject.repository.UserRepo;
 
 
 @Service
@@ -17,8 +21,16 @@ public class QustionServicelist implements QustionService{
     @Autowired
     private QustionRepo qustionRepo;
 
+    @Autowired
+    private UserRepo userRepo;
+
+
+    
+
     @Override
     public Qustion creaQustion(Qustion qustion) {
+      User u1 =this.getUsername();
+      qustion.setUserid(u1.getId());
       Qustion q1=  qustionRepo.save(qustion);
       return q1;
         
@@ -51,6 +63,17 @@ public class QustionServicelist implements QustionService{
     public String delete(Integer id) {
        qustionRepo.deleteById(id);
        return "delete success";
+    }
+
+
+    private User getUsername(){
+      UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                        .getPrincipal();
+      String username = userDetails.getUsername();
+      User loginuser =userRepo.findByEmail(username);
+      return loginuser;
+
+      
     }
     
 }

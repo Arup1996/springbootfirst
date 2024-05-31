@@ -27,6 +27,8 @@ public class Userserviceimp implements UserService {
         return u1;
     }
 
+
+
     @Override
     public User Updateuser(User user, Integer Id) {
         // TODO Auto-generated method stub

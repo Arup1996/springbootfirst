@@ -11,6 +11,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +44,7 @@ public class QustionController {
 
     @PostMapping("/addqustion")
     public Qustion CreatQustion(@RequestBody Qustion qustion) {
+        
         Qustion q2=qustionServicelist.creaQustion(qustion);
         
        return q2; 
@@ -52,6 +56,8 @@ public class QustionController {
         return qustionServicelist.updateQustion(qustion,id);
 
     }
+
+
 
     
     @SuppressWarnings("rawtypes")
@@ -65,7 +71,10 @@ public class QustionController {
 
     @GetMapping("/path")
     public String testhello() {
-        return "hello";
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                        .getPrincipal();
+        String username = userDetails.getUsername();
+        return username;
     }
     
     
