@@ -59,5 +59,10 @@ public class GameService implements GameInterfcce {
         }
         return null;
     }
+
+    public String delete(Integer id) {
+        gameRepo.deleteById(id);
+        return "delete success";
+    } 
     
 }

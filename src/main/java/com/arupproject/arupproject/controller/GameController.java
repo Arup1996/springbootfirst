@@ -14,6 +14,7 @@ import com.arupproject.arupproject.entity.Game;
 import com.arupproject.arupproject.service.GameService;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -102,6 +103,14 @@ public class GameController {
         
         return new ResponseEntity<GameResponse>(gr,HttpStatus.OK);
     }
+
+        @CrossOrigin("*")
+        @SuppressWarnings("rawtypes")
+        @DeleteMapping("/delete_game/{id}")
+        public ResponseEntity delete(@PathVariable Integer id) {
+            String st=gameService.delete(id);
+            return new ResponseEntity<>(st,HttpStatus.OK);
+        }
     
     
     
